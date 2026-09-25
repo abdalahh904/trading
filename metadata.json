@@ -1,0 +1,9 @@
+{
+  "name": "AI-TRADER",
+  "description": "Autonomous Forex & Gold trading platform with strict real MetaTrader 5 account verification, broker execution, and multi-regime intelligence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ],
+  "version": "1.9.1"
+}

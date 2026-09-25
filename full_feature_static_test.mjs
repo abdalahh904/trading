@@ -1,0 +1,17 @@
+import fs from 'fs';
+import assert from 'assert';
+const read=p=>fs.readFileSync(p,'utf8');
+const server=read('server.ts');
+const orders=read('src/components/tabs/OrdersTab.tsx');
+const pos=read('src/components/tabs/PositionsTab.tsx');
+const chart=read('src/components/TradingViewChart.tsx');
+const renderer=read('src/server/chart_renderer.ts');
+const exec=read('src/server/execution_log.ts');
+for (const route of ['/api/broker/history/deals','/api/execution-log','/api/trade-journal','/api/positions/monetary-levels']) assert(server.includes(route), `missing ${route}`);
+for (const marker of ['Broker Trade Journal','Execution Log','AI Trade Journal','/api/broker/history/deals','/api/execution-log','/api/trade-journal']) assert(orders.includes(marker), `missing OrdersTab marker ${marker}`);
+assert(pos.includes('/api/positions/monetary-levels'),'Positions monetary endpoint not wired');
+assert(chart.includes('livePosition'),'AI chart does not gate order levels by live position');
+assert(chart.includes('order SL/TP appear after broker fill'),'AI chart pre-order rule missing');
+assert(renderer.includes('sl?: number'),'chart renderer does not support pre-order projection');
+assert(exec.includes("'CONFIDENCE_PASS'") && exec.includes("'POSITION_VERIFIED'"),'execution state machine stages missing');
+console.log('FULL_FEATURE_STATIC_TEST PASS');

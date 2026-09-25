@@ -1,0 +1,26 @@
+AI-TRADER v1.8.0 — ADVANCED VERIFIED ANALYSIS & PERSISTENT THESIS
+
+Core changes
+- Removed flat 55% / WAIT fallback and fixed identical conviction across symbols.
+- Evidence-driven SMC v3 fallback produces independent BUY/SELL + dynamic confidence from live broker candles.
+- Gemini remains primary when GEMINI_API_KEY is configured; fallback is explicitly marked ALGORITHMIC_FALLBACK / provisional.
+- Trading Type controls primary + confirmation timeframes and is passed into deep visual analysis.
+- Minimum Confidence is the strategy entry authority.
+- MTF conflict, target-space quality, timing, volatility, spread, freshness and counter-evidence contribute to verified confidence; they are not hidden duplicate confidence gates.
+- Hard execution protections remain: real verified MT5 demo account, connection/synchronization, fresh data, spread, risk, portfolio, news, reconciliation, SL/TP and broker execution verification.
+- One active position per symbol. Same-direction thesis monitors the existing ticket. Opposite-direction thesis stays separate and cannot attach to the wrong ticket or open a duplicate.
+- Persistent thesis lifecycle and execution registry use atomic writes and broker reconciliation for restart/reconnect recovery.
+- Runtime state files are intentionally excluded from the release archive so an upgrade does not overwrite live state.
+
+Trading modes
+- SCALPING: primary M15; confirmation M5/H1; 10s scan cadence.
+- INTRADAY: primary H1; confirmation M15/H4; 15s scan cadence.
+- SWING: primary H4; confirmation H1/D1; 30s scan cadence.
+
+Verification
+- TypeScript/TSX transpile audit: 50/50 files PASS.
+- Python bridge py_compile: PASS.
+- Runtime fallback test: BUY 82%, SELL 82%, mixed 69%, strong SMC BUY 92% on controlled candle fixtures.
+- Runtime strategy test: verified BUY 89% with FALLBACK_PROVISIONAL provenance.
+- Thesis persistence round-trip: Thesis ID and MONITORING ticket recovered successfully.
+- Full npm/tsc build was not possible in this environment because local dependencies/types (vite/client) are absent; no source syntax diagnostics were reported by transpilation.

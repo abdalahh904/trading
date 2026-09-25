@@ -1,0 +1,27 @@
+AI-TRADER v1.9.0 RELEASE MANIFEST
+================================
+Version: 1.9.0
+Focus: Final Percentage Decision + Advanced Verified Analysis + Persistent Thesis + Chart Forecast Projection
+
+Key files:
+- src/server/verified_confidence_engine.ts
+- src/server/strategy_ranking.ts
+- src/server/ai_trading_pipeline.ts
+- src/server/thesis_lifecycle_engine.ts
+- src/server/live_analysis_service.ts
+- src/server/mt5_connector.ts
+- src/server/chart_renderer.ts
+- src/server/state_store.ts
+- src/server/risk_engine.ts
+- src/components/TradingViewChart.tsx
+- src/components/tabs/LiveActivityTab.tsx
+- src/components/tabs/SettingsTab.tsx
+- bridge_supervised.bat
+- package.json / package-lock.json / metadata.json
+
+Decision invariant:
+FULL ANALYSIS -> FINAL BUY/SELL + VERIFIED % -> if % >= user minimum, submit immediately.
+No second strategy veto is evaluated after the percentage decision.
+
+Safety/infrastructure invariant:
+Actual MT5 connectivity, account mode, broker permission, and broker-side execution verification remain necessary for a real broker fill.

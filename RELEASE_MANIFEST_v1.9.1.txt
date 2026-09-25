@@ -1,0 +1,17 @@
+AI-TRADER v1.9.1
+
+CORE CHANGE
+- Final verified confidence is the sole strategy-level entry authority.
+- Once final confidence >= configured minimum, execution path submits immediately without a second strategy/risk/news/MTF gate.
+- Existing active thesis/position identity prevents duplicate opens.
+
+EXECUTION TRUTH
+- Broker/terminal failures remain physical execution failures (e.g. disconnected MT5, disabled AutoTrading, broker permissions, missing SL/TP, broker rejection). The application cannot force a broker fill.
+- Such failures are reported as EXECUTION_FAILED, not as a strategy confidence block.
+
+CHART/UI
+- Existing advanced analysis retained.
+- Added Classic Gold, Institutional, Carbon and TradingView Dark global themes.
+
+STABILITY
+- run_bridge.bat now detects an existing listener on 127.0.0.1:18812 and exits without spawning a duplicate bridge.
